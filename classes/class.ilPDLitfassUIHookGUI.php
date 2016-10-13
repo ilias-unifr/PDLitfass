@@ -107,7 +107,7 @@ class ilPDLitfassUIHookGUI extends ilUIHookPluginGUI
 			// $a_par["tabs"] is ilTabsGUI object
 			
 			// add a tab (always)
-			$a_par["tabs"]->addTab("test", "test", "test");
+			$a_par["tabs"]->addTab("PDLitfass", "PDLitass", "PDLitfass");
 		}
 	}
 
