@@ -18,6 +18,9 @@ class ilPDLitfassConfigGUI extends ilPluginConfigGUI
 
 		switch ($cmd)
 		{
+			case "default":
+				$this->$cmd();
+				break;
 			case "configure":
 			case "save":
 				$this->$cmd();
@@ -57,7 +60,7 @@ class ilPDLitfassConfigGUI extends ilPluginConfigGUI
 		
 		// Show Block?
 		$cb = new ilCheckboxInputGUI($pl->txt("show_block"), "show_block");
-		$cb -> setValue(0);
+		$cb -> setValue(1);
 		$cb->setChecked($this->getConfigValue('show_block', false));
 		$form->addItem($cb);
 
