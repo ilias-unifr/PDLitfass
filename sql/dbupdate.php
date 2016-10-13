@@ -8,11 +8,11 @@
 		),
 		'value'=>array(
 			'type'=>'blob',
-			'length'=>3000
+	#		'length'=>3000
 //			'fixed'=>true
 		),
 	);
 	
-	$ilDB->createTable('ui_uihk_pdlitfass_config', $fields);
-	$ilDB->addPrimaryKey('ui_uihk_pdlitfass_config', array('name'));
+	$ilDB->createTable('ui_uihk_litfass_config', $fields);
+	$ilDB->addPrimaryKey('ui_uihk_litfass_config', array('name'));
 ?>
