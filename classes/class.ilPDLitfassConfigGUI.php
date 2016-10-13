@@ -18,9 +18,6 @@ class ilPDLitfassConfigGUI extends ilPluginConfigGUI
 
 		switch ($cmd)
 		{
-			case "default":
-				$this->$cmd();
-				break;
 			case "configure":
 			case "save":
 				$this->$cmd();
@@ -93,9 +90,9 @@ class ilPDLitfassConfigGUI extends ilPluginConfigGUI
 		$form = $this->initConfigurationForm();
 		if ($form->checkInput())
 		{
-			$litfass_message = $form->getInput("litfass_message");
+			$litfass_message = $form->getInput("message");
 			$cb = $form->getInput("show_block");
-	
+			$this->storeConfigValue($litfass_message, "msg-nr");	
 			
 			ilUtil::sendSuccess($pl->txt("saving_invoked"), true);
 			$ilCtrl->redirect($this, "configure");
