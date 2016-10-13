@@ -83,7 +83,7 @@ class ilPDLitfassConfigGUI extends ilPluginConfigGUI
 	 */
 	public function save()
 	{
-		global $tpl, $lng, $ilCtrl;
+		global $tpl, $lng, $ilCtrl, $ilDB;
 	
 		$pl = $this->getPluginObject();
 		
@@ -92,7 +92,8 @@ class ilPDLitfassConfigGUI extends ilPluginConfigGUI
 		{
 			$litfass_message = $form->getInput("message");
 			$cb = $form->getInput("show_block");
-			$this->storeConfigValue("1", "1", $litfass_message);	
+			$id = $ilDB->nextID('ui_uihk_litfass_config');
+			$this->storeConfigValue($id, "1", $litfass_message);	
 			
 			ilUtil::sendSuccess($pl->txt("saving_invoked"), true);
 			$ilCtrl->redirect($this, "configure");
