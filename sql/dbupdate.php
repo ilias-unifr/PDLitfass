@@ -1,18 +1,21 @@
 <#1>
 <?php
 	$fields = array(
-		'name'=>array(
-			'type'=>'text',
-			'length'=>50,
-			'fixed'=>true
+		'id'=>array(
+			'type'=>'integer',
+			'length'=>2
 		),
-		'value'=>array(
-			'type'=>'blob',
-	#		'length'=>3000
-//			'fixed'=>true
+		'display'=>array(
+			'type'=>'integer',
+			'length'=>2
+		),
+		'message'=>array(
+			'type'=>'text',
+			'length'=>300
 		),
 	);
 	
 	$ilDB->createTable('ui_uihk_litfass_config', $fields);
-	$ilDB->addPrimaryKey('ui_uihk_litfass_config', array('name'));
+	$ilDB->addPrimaryKey('ui_uihk_litfass_config', array('id'));
+	$ilDB->createSequence('ui_uihk_litfass_config');
 ?>
