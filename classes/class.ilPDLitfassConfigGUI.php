@@ -49,7 +49,7 @@ class ilPDLitfassConfigGUI extends ilPluginConfigGUI
 	 */
 	public function initConfigurationForm()
 	{
-		global $ilCtrl;
+		global $ilCtrl, $lng;
 		
 		$pl = $this->getPluginObject();
 	
@@ -110,7 +110,7 @@ class ilPDLitfassConfigGUI extends ilPluginConfigGUI
 	}
 
 
-		protected function storeConfiguration($name, $value)
+		protected function storeConfigValue($name, $value)
 		{
 			global $ilDB;
 			
@@ -126,7 +126,7 @@ class ilPDLitfassConfigGUI extends ilPluginConfigGUI
 			return $ilDB->manipulate($sql);
 		}
 		
-		protected function getConfiguration($name, $default = '')
+		protected function getConfigValue($name, $default = '')
 		{ 
 			global $ilDB;
 			$sql = "SELECT `value` 
