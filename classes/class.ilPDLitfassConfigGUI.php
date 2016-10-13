@@ -61,16 +61,14 @@ class ilPDLitfassConfigGUI extends ilPluginConfigGUI
 		// Show Block?
 		$cb = new ilCheckboxInputGUI($pl->txt("show_block"), "show_block");
 		$cb -> setValue(1);
-		$cb->setChecked($this->getConfigValue('show_block', false));
+		$cb->setChecked($this->getConfigValue('show_block', true));
 		$form->addItem($cb);
 
 		
 		// PDLitfass Info message
-		$litfass_message = new ilTextInputGUI($pl->txt("litfass_message"), "litfass_message");
+		$litfass_message = new ilTextAreaInputGUI($pl->txt("message"), "message");
 		$litfass_message->setRequired(true);
-		$litfass_message->setMaxLength(300);
-		$litfass_message->setSize(60);
-		$litfass_message->setValue($this->getConfigValue('litfass_message')); //??
+		$litfass_message->setValue($this->getConfigValue('message')); //??
 		$form->addItem($litfass_message);
 
 		// Save Button
