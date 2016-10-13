@@ -141,6 +141,6 @@ class ilPDLitfassConfigGUI extends ilPluginConfigGUI
 			else
 				return $row->value;
 			}
-}
+
 }
 ?>
