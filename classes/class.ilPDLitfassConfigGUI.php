@@ -100,7 +100,8 @@ class ilPDLitfassConfigGUI extends ilPluginConfigGUI
 			$litfass_message = $form->getInput("message");
 			$cb = $form->getInput("show_block");
 			$id = $ilDB->nextID('ui_uihk_litfass_config');
-			
+		
+				
 			$this->storeConfigValue($id, $cb, $litfass_message);	
 			
 			ilUtil::sendSuccess($pl->txt("saving_invoked"), true);
@@ -114,7 +115,7 @@ class ilPDLitfassConfigGUI extends ilPluginConfigGUI
 	}
 
 
-		protected function storeConfigValue($id, $display, $message)
+		protected function storeConfigValue($id, $display, $litfass_message)
 		{
 			global $ilDB;
 			
@@ -123,7 +124,7 @@ class ilPDLitfassConfigGUI extends ilPluginConfigGUI
 						VALUES (
 							{$ilDB->quote($id, "text")},
 							{$ilDB->quote($display, "text")},
-							{$ilDB->quote($message, "text")})";
+							{$ilDB->quote($litfass_message, "text")})";
 			
 			else
 				$sql = "UPDATE `ui_uihk_litfass_config`
