@@ -2,6 +2,7 @@
 
 
 include_once("./Services/UIComponent/classes/class.ilUIHookPluginGUI.php");
+include_once("class.ilPDLitfassConfigGUI.php");
 
 /**
  * Addapted from User interface hook class plugin example
@@ -49,7 +50,8 @@ class ilPDLitfassUIHookGUI extends ilUIHookPluginGUI
 	*/
 	function getLitfassHTML()
 	{
-		return "huhu";
+	$message= getConfigValue(1);		
+		return $message;
 	}
 
 	/**
