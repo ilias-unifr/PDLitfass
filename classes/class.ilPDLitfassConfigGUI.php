@@ -58,14 +58,21 @@ class ilPDLitfassConfigGUI extends ilPluginConfigGUI
 		// Show Block?
 		$cb = new ilCheckboxInputGUI($pl->txt("show_block"), "show_block");
 		$cb -> setValue(1);
-		$cb->setChecked($this->getConfigValue('display', true));
+		$checked = $this->getConfigValue('1');                                                                                                                                                                                  		
+		$cb->setChecked($checked[display]);
+
 		$form->addItem($cb);
 
 		
 		// PDLitfass Info message
-		$litfass_message = new ilTextAreaInputGUI($pl->txt("message"), "message");
+		$litfass_message = new ilTextAreaInputGUI($pl->txt("litfass_message"), "litfass_message");
 		$litfass_message->setRequired(true);
-		$litfass_message->setValue($this->getConfigValue('message')); //??
+		$litmessage =	$this->getConfigValue('1');
+
+			print_r($litmessage);
+		
+		$litfass_message->setValue($litmessage[message]);
+		
 		$form->addItem($litfass_message);
 
 		// Save Button
@@ -93,7 +100,8 @@ class ilPDLitfassConfigGUI extends ilPluginConfigGUI
 			$litfass_message = $form->getInput("message");
 			$cb = $form->getInput("show_block");
 			$id = $ilDB->nextID('ui_uihk_litfass_config');
-			$this->storeConfigValue($id, "1", $litfass_message);	
+			
+			$this->storeConfigValue($id, $cb, $litfass_message);	
 			
 			ilUtil::sendSuccess($pl->txt("saving_invoked"), true);
 			$ilCtrl->redirect($this, "configure");
@@ -110,34 +118,37 @@ class ilPDLitfassConfigGUI extends ilPluginConfigGUI
 		{
 			global $ilDB;
 			
-			if($this->getConfigValue($message, false) === false)
+			if($this->getConfigValue('1'))
 				$sql = "INSERT INTO `ui_uihk_litfass_config` (`id`,`display`,`message`)
 						VALUES (
 							{$ilDB->quote($id, "text")},
 							{$ilDB->quote($display, "text")},
 							{$ilDB->quote($message, "text")})";
+			
 			else
 				$sql = "UPDATE `ui_uihk_litfass_config`
-				SET `value` = {$ilDB->quote($value, "text")}
-				WHERE `name` = {$ilDB->quote($name, "text")}";
+				SET `message` = {$ilDB->quote($message, "text")}
+				WHERE `id` = {$ilDB->quote($id, "text")}";
 			return $ilDB->manipulate($sql);
+			
 		}
 		
-		protected function getConfigValue($name, $default = '')
+		public function getConfigValue($id)
 		{ 
+			if (!$id)
+				$id = 1;
+ 
 			global $ilDB;
-			$sql = "SELECT * 
+	
+			$sql = $ilDB->query("SELECT *   
 					FROM `ui_uihk_litfass_config`
-					WHERE `display` = {$ilDB->quote($name, "text")}";
+					WHERE `id` = $id");
 
-			$result = $ilDB->query($sql);
-			$row = $ilDB->fetchObject($result);
-		
-			if(!$row)
-				return $default;
-			else
-				return $row->value;
-			}
+			$row = $ilDB->fetchAssoc($sql);
+			//print_r($row);	
+			return $row;	
+
+		}
 
 }
 ?>
