@@ -97,7 +97,8 @@ class ilPDLitfassConfigGUI extends ilPluginConfigGUI
 		$form = $this->initConfigurationForm();
 		if ($form->checkInput())
 		{
-			$litfass_message = $form->getInput("message");
+			$litfass_message = $form->getInput("litfass_message");
+			
 			$cb = $form->getInput("show_block");
 			$id = $ilDB->nextID('ui_uihk_litfass_config');
 		
