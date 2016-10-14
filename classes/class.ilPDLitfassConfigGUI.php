@@ -46,19 +46,21 @@ class ilPDLitfassConfigGUI extends ilPluginConfigGUI
 	 */
 	public function initConfigurationForm()
 	{
-		global $ilCtrl, $lng;
+		global $ilCtrl, $lng, $ilDB;
 		
 		$pl = $this->getPluginObject();
+
+		$id = $this->getcurrentID();
+
+echo($id[sequence]);	
 	
 		include_once("Services/Form/classes/class.ilPropertyFormGUI.php");
 		$form = new ilPropertyFormGUI();
-	
-		
 		
 		// Show Block?
 		$cb = new ilCheckboxInputGUI($pl->txt("show_block"), "show_block");
 		$cb -> setValue(1);
-		$checked = $this->getConfigValue('1');                                                                                                                                                                                  		
+		$checked = $this->getConfigValue($id[sequence]);                                                                                                                                                                                  		
 		$cb->setChecked($checked[display]);
 
 		$form->addItem($cb);
@@ -67,7 +69,7 @@ class ilPDLitfassConfigGUI extends ilPluginConfigGUI
 		// PDLitfass Info message
 		$litfass_message = new ilTextAreaInputGUI($pl->txt("litfass_message"), "litfass_message");
 		$litfass_message->setRequired(true);
-		$litmessage =	$this->getConfigValue('1');
+		$litmessage =	$this->getConfigValue($id[sequence]);
 
 			print_r($litmessage);
 		
@@ -152,5 +154,18 @@ class ilPDLitfassConfigGUI extends ilPluginConfigGUI
 
 		}
 
+		public function getcurrentID()
+		{
+  
+                         global $ilDB;
+         
+                         $sql = $ilDB->query("SELECT *   
+                                         FROM `ui_uihk_litfass_config_seq`
+                                         ");
+ 
+                         $row = $ilDB->fetchAssoc($sql);
+                         //print_r($row);        
+                         return $row; 
+		}
 }
 ?>
