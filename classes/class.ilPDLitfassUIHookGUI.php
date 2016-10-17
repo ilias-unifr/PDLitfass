@@ -70,11 +70,11 @@ class ilPDLitfassUIHookGUI extends ilUIHookPluginGUI
 
 	$pl = $this->getPluginObject();
 
-	$message =  ilPDLitfassConfigGUI::getConfigValue($id);		
+	$db_row =  ilPDLitfassConfigGUI::getConfigValue($id);		
 	
 	$btpl = $pl->getTemplate("tpl.pdlitfass_block.html");	
-	$btpl->setVariable("TITLE", "LITFASS BOX");
-	$btpl->setVariable("PDLITFASS_MESSAGE", $message[message]);
+	$btpl->setVariable("TITLE", $db_row[title]);
+	$btpl->setVariable("PDLITFASS_MESSAGE", $db_row[message]);
 
 	//	return $message[message];
 		return $btpl->get();
