@@ -52,7 +52,6 @@ class ilPDLitfassConfigGUI extends ilPluginConfigGUI
 
 		$id = $this->getcurrentID();
 
-echo($id[sequence]);	
 	
 		include_once("Services/Form/classes/class.ilPropertyFormGUI.php");
 		$form = new ilPropertyFormGUI();
@@ -60,7 +59,7 @@ echo($id[sequence]);
 		// Show Block?
 		$cb = new ilCheckboxInputGUI($pl->txt("show_block"), "show_block");
 		$cb -> setValue(1);
-		$checked = $this->getConfigValue($id[sequence]);                                                                                                                                                                                  		
+		$checked = $this->getConfigValue($id);                                                                                                                                                                                  		
 		$cb->setChecked($checked[display]);
 
 		$form->addItem($cb);
@@ -69,7 +68,7 @@ echo($id[sequence]);
 		// PDLitfass Info message
 		$litfass_message = new ilTextAreaInputGUI($pl->txt("litfass_message"), "litfass_message");
 		$litfass_message->setRequired(true);
-		$litmessage =	$this->getConfigValue($id[sequence]);
+		$litmessage =	$this->getConfigValue($id);
 
 			print_r($litmessage);
 		
@@ -165,7 +164,7 @@ echo($id[sequence]);
  
                          $row = $ilDB->fetchAssoc($sql);
                          //print_r($row);        
-                         return $row; 
+                         return $row[sequence]; 
 		}
 }
 ?>

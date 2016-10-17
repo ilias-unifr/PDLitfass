@@ -11,6 +11,19 @@ include_once("class.ilPDLitfassConfigGUI.php");
  * @version $Id$
  * @ingroup ServicesUIComponent
  */
+
+
+        function showBlock($id)
+        {    
+                $showBlock =  ilPDLitfassConfigGUI::getConfigValue($id);
+    
+                if ($showBlock[display]) 
+                        return true;
+                else
+                        return false;
+        }
+
+
 class ilPDLitfassUIHookGUI extends ilUIHookPluginGUI
 {
 
@@ -27,16 +40,20 @@ class ilPDLitfassUIHookGUI extends ilUIHookPluginGUI
 	 *
 	 * @return array array with entries "mode" => modification mode, "html" => your html
 	 */
+
 	function getHTML($a_comp, $a_part, $a_par = array())
 	{
 
 		// add things to the personal desktop overview
-		if ($a_comp == "Services/PersonalDesktop" && $a_part == "center_column")
+
+		$show_Block = showBlock(ilPDLitfassConfigGUI::getcurrentID());
+
+		if ($a_comp == "Services/PersonalDesktop" && $a_part == "center_column" && $show_Block == true)
 		{
 			// $a_par["personal_desktop_gui"] is ilPersonalDesktopGUI object
 			
 			return array("mode" => ilUIHookPluginGUI::PREPEND,
-				"html" => $this->getLitfassHTML());
+				"html" => $this->getLitfassHTML(ilPDLitfassConfigGUI::getcurrentID()));
 		}
 
 		return array("mode" => ilUIHookPluginGUI::KEEP, "html" => "");
@@ -48,10 +65,20 @@ class ilPDLitfassUIHookGUI extends ilUIHookPluginGUI
 	*
 	* @return string HTML of lifass-Block
 	*/
-	function getLitfassHTML()
+	function getLitfassHTML($id)
 	{
-	$message= getConfigValue(1);		
-		return $message;
+	$message =  ilPDLitfassConfigGUI::getConfigValue($id);		
+		return $message[message];
+	}
+
+	function showBlock($id)
+	{	
+		$showBlock =  ilPDLitfassConfigGUI::getConfigValue($id);
+	
+		if ($showBlock[display]) 
+			return true;
+		else
+			return false;
 	}
 
 	/**
