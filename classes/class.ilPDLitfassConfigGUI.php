@@ -51,7 +51,6 @@ class ilPDLitfassConfigGUI extends ilPluginConfigGUI
 		$pl = $this->getPluginObject();
 
 		$id = $this->getcurrentID();
-
 	
 		include_once("Services/Form/classes/class.ilPropertyFormGUI.php");
 		$form = new ilPropertyFormGUI();
@@ -59,27 +58,26 @@ class ilPDLitfassConfigGUI extends ilPluginConfigGUI
 		// Show Block?
 		$cb = new ilCheckboxInputGUI($pl->txt("show_block"), "show_block");
 		$cb -> setValue(1);
-		$checked = $this->getConfigValue($id);                                                                                                                                                                                  		
+		$checked = $this->getConfigValue($id); 
 		$cb->setChecked($checked[display]);
-
 		$form->addItem($cb);
-
+		
+		//PDLitfass Info Title
+                $litfass_title =  new ilTextInputGUI($pl->txt("litfass_title"), "litfass_title");
+                $litfass_title->setRequired(true);
+                $littitle = $this->getConfigValue($id);
+                $litfass_title->setValue($littitle[title]);
+                $form->addItem($litfass_title);
 		
 		// PDLitfass Info message
 		$litfass_message = new ilTextAreaInputGUI($pl->txt("litfass_message"), "litfass_message");
 		$litfass_message->setRequired(true);
 		$litmessage =	$this->getConfigValue($id);
-
-			print_r($litmessage);
-		
 		$litfass_message->setValue($litmessage[message]);
-		
 		$form->addItem($litfass_message);
 
 		// Save Button
-			
 		$form->addCommandButton("save", $lng->txt("save"));
-	                
 		$form->setTitle($pl->txt("litfass_configuration"));
 		$form->setFormAction($ilCtrl->getFormAction($this));
 		
@@ -99,13 +97,13 @@ class ilPDLitfassConfigGUI extends ilPluginConfigGUI
 		if ($form->checkInput())
 		{
 			$litfass_message = $form->getInput("litfass_message");
-			
+			$litfass_title = $form->getInput("litfass_title"); 	
 			$cb = $form->getInput("show_block");
-			$id = $ilDB->nextID('ui_uihk_litfass_config');
-		
-				
-			$this->storeConfigValue($id, $cb, $litfass_message);	
+			$id = $ilDB->nextID('ui_uihk_litfass_config');				
 			
+			// store Values
+
+			$this->storeConfigValue($id, $cb, $litfass_message, $litfass_title);	
 			ilUtil::sendSuccess($pl->txt("saving_invoked"), true);
 			$ilCtrl->redirect($this, "configure");
 		}
@@ -117,16 +115,17 @@ class ilPDLitfassConfigGUI extends ilPluginConfigGUI
 	}
 
 
-		protected function storeConfigValue($id, $display, $litfass_message)
+		protected function storeConfigValue($id, $display, $litfass_message, $litfass_title)
 		{
 			global $ilDB;
 			
 			if($this->getConfigValue('1'))
-				$sql = "INSERT INTO `ui_uihk_litfass_config` (`id`,`display`,`message`)
+				$sql = "INSERT INTO `ui_uihk_litfass_config` (`id`,`display`,`message`, `title`)
 						VALUES (
 							{$ilDB->quote($id, "text")},
 							{$ilDB->quote($display, "text")},
-							{$ilDB->quote($litfass_message, "text")})";
+							{$ilDB->quote($litfass_message, "text")},
+							{$ilDB->quote($litfass_title, "text")})";
 			
 			else
 				$sql = "UPDATE `ui_uihk_litfass_config`
