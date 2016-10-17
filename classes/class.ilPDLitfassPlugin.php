@@ -15,6 +15,17 @@ class ilPDLitfassPlugin extends ilUserInterfaceHookPlugin
 	{
 		return "PDLitfass";
 	}
+
+	        protected function uninstallCustom()
+        {
+		 
+		global $ilDB;
+
+            
+        $ilDB->dropTable('ui_uihk_litfass_config');				
+        }
+
+
 }
 
 ?>
