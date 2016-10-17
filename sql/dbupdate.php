@@ -13,6 +13,10 @@
 			'type'=>'text',
 			'length'=>300
 		),
+		'title'=>array(
+			'type'=>'text',
+			'length'=>300
+		),
 	);
 	
 	$ilDB->createTable('ui_uihk_litfass_config', $fields);
