@@ -56,6 +56,7 @@ class ilPDLitfassUIHookGUI extends ilUIHookPluginGUI
 				"html" => $this->getLitfassHTML(ilPDLitfassConfigGUI::getcurrentID()));
 		}
 
+
 		return array("mode" => ilUIHookPluginGUI::KEEP, "html" => "");
 	}
 	
@@ -68,15 +69,12 @@ class ilPDLitfassUIHookGUI extends ilUIHookPluginGUI
 	function getLitfassHTML($id)
 	{
 
-	$pl = $this->getPluginObject();
+		$pl = $this->getPluginObject();
+		$db_row =  ilPDLitfassConfigGUI::getConfigValue($id);		
+		$btpl = $pl->getTemplate("tpl.pdlitfass_block.html");	
+		$btpl->setVariable("TITLE", $db_row[title]);
+		$btpl->setVariable("PDLITFASS_MESSAGE", $db_row[message]);
 
-	$db_row =  ilPDLitfassConfigGUI::getConfigValue($id);		
-	
-	$btpl = $pl->getTemplate("tpl.pdlitfass_block.html");	
-	$btpl->setVariable("TITLE", $db_row[title]);
-	$btpl->setVariable("PDLITFASS_MESSAGE", $db_row[message]);
-
-	//	return $message[message];
 		return $btpl->get();
 	}
 
