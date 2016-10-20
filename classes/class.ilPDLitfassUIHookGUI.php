@@ -54,9 +54,6 @@ class ilPDLitfassUIHookGUI extends ilUIHookPluginGUI
 			
 			return array("mode" => ilUIHookPluginGUI::PREPEND,
 				"html" => $this->getLitfassHTML(ilPDLitfassConfigGUI::getcurrentID()));
-			return array("mode" => ilUIHookPluginGUI::PREPEND,
-				"html" => $this->getLitfassHTML(ilPDLitfassConfigGUI::getcurrentID()));
-	
 		
 			}
 
