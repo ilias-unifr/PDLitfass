@@ -8,8 +8,9 @@ configuration_saved#:#Konfiguration wurde gespeichert.
 show_block#:#Block auf Persönlichem Schreibtisch anzeigen
 litfass_title#:#Titel der Nachricht
 litfass_message#:#Text der Nachricht
-employee#:#Fuer MitarbeiterInnen sichtbar
-student#:#Fuer StudentInnen sichtbar
+employee#:#Für MitarbeiterInnen sichtbar
+student#:#Für StudentInnen sichtbar
 saving_invoked#:#Konfiguration gespeichert
-employee_roles#:#RollenIDs fuer MitarbeiterInnen
-students_roles#:#RollenIDs fuer Studierende
+employee_roles#:#RollenIDs für MitarbeiterInnen
+students_roles#:#RollenIDs für Studierende
+info#:#RollenIDs:

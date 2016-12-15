@@ -92,8 +92,8 @@ class ilPDLitfassUIHookGUI extends ilUIHookPluginGUI
 
 
 
-$roles = getRoles(2,1);
-print_r( $roles);
+//$roles = getRoles(2,1);
+//print_r( $roles);
 
 function getRoles($filter, $with_text = true) {
                 global $rbacreview;
