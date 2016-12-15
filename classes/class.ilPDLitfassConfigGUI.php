@@ -179,7 +179,7 @@ class ilPDLitfassConfigGUI extends ilPluginConfigGUI
 		{
 			global $ilDB;
 			
-			if($this->getConfigValue('1'))
+		//	if($this->getConfigValue('1'))
 				$sql = "INSERT INTO `ui_uihk_litfass_config` (`id`,`display`,`message`, `title`, `employee`,`student`,`eroles`,`sroles`)
 						VALUES (
 							{$ilDB->quote($id, "text")},
@@ -191,10 +191,10 @@ class ilPDLitfassConfigGUI extends ilPluginConfigGUI
 							{$ilDB->quote($eroles, "text")},
 							{$ilDB->quote($sroles, "text")})";
 			
-			else
-				$sql = "UPDATE `ui_uihk_litfass_config`
-				SET `message` = {$ilDB->quote($message, "text")}
-				WHERE `id` = {$ilDB->quote($id, "text")}";
+		//	else
+		//		$sql = "UPDATE `ui_uihk_litfass_config`
+		//		SET `message` = {$ilDB->quote($message, "text")}
+		//		WHERE `id` = {$ilDB->quote($id, "text")}";
 			return $ilDB->manipulate($sql);
 			
 		}
