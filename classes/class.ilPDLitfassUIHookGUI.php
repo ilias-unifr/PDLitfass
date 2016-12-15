@@ -4,7 +4,7 @@
 include_once("./Services/UIComponent/classes/class.ilUIHookPluginGUI.php");
 include_once("class.ilPDLitfassConfigGUI.php");
 include_once("./Services/AccessControl/classes/class.ilRbacReview.php");
-
+include_once("./Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/PDLitfass/classes/class.ilPDLitfassFunctions.php");
 /**
  * Addapted from User interface hook class plugin example
  *
@@ -14,36 +14,6 @@ include_once("./Services/AccessControl/classes/class.ilRbacReview.php");
  */
 
 
-
-        function showBlock($id)
-        {    
-                $showBlock =  ilPDLitfassConfigGUI::getConfigValue($id);
-   		$student  = $showBlock[student];
-		//echo  "student: " .$student;
-		$employee = $showBlock[employee];
-		//echo  "employee: " .$employee;
-		$showBlockforRole = 0;
-
-		//1= Mitarbeiter, 2=Studierende
-		$whichRole = whichRole($id);
-		//echo "Rolle: " . $whichRole;
-
-		
-                if ($showBlock[display] & ($showBlockforRole = 1)) 
-		{
-                	if (($whichRole == 2 & $student == 1))
-			{
-				return true;
-			}
-			if (($whichRole ==1 & $employee == 1))
-			{
-				return true;
-			}
-		}
-                else
-                        return false;
-
-        }
 
 
 
@@ -67,6 +37,9 @@ class ilPDLitfassUIHookGUI extends ilUIHookPluginGUI
 //	$this->allow_moving = true;
 	function getHTML($a_comp, $a_part, $a_par = array())
 	{
+
+		include_once("./Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/PDLitfass/classes/class.ilPDLitfassFunctions.php");
+
 
 		// add things to the personal desktop overview
 
@@ -112,13 +85,15 @@ class ilPDLitfassUIHookGUI extends ilUIHookPluginGUI
 		return $btpl->get();
 	}
 
-
 }
-	           	global  $ilUser;
-                   	global $rbacreview;
-			global $roleid;
+//	           	global $ilUser;
+//                   	global $rbacreview;
+//			global $roleid;
 
 
+
+$roles = getRoles(2,1);
+print_r( $roles);
 
 function getRoles($filter, $with_text = true) {
                 global $rbacreview;
@@ -144,7 +119,6 @@ function whichRole($id) {
                     	$userid =  $ilUser->getId();
 			
 	           $assignedRoles = $rbacreview->assignedRoles($userid,1);
-// print_r($assignedRoles);
 
 	//	$needles_array = array("2", "238");
                 $configValues =  ilPDLitfassConfigGUI::getConfigValue($id);
@@ -170,7 +144,7 @@ function whichRole($id) {
                 } 
 
 		}
-function in_array_any($needles, $haystack) {
+	function in_array_any($needles, $haystack) {
 	   return !!array_intersect($needles, $haystack);
 	}
 

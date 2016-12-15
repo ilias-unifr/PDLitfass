@@ -5,21 +5,17 @@ include_once("./Services/Component/classes/class.ilPluginConfigGUI.php");
 require_once('./Services/Form/classes/class.ilPropertyFormGUI.php');
 require_once('./Services/Component/classes/class.ilPluginConfigGUI.php');
 require_once('./Services/Utilities/classes/class.ilConfirmationGUI.php');
+require_once('./Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/PDLitfass/classes/class.ilPDLitfassFunctions.php');
 
 
-#require_once('class.ilCtrlMainMenuPlugin.php');
-#require_once('class.ilCtrlMainMenuConfig.php');
-#require_once('./Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/CtrlMainMenu/classes/Entry/class.ctrlmmEntryGUI.php');
-#require_once('./Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/CtrlMainMenu/classes/Entry/class.ctrlmmEntryTableGUI.php');
-#require_once('./Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/CtrlMainMenu/classes/Entry/class.ctrlmmEntry.php');
-#require_once('./Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/CtrlMainMenu/classes/Menu/class.ctrlmmMenu.php');
-require_once('./Services/Component/classes/class.ilPluginConfigGUI.php');
-require_once('./Services/Form/classes/class.ilPropertyFormGUI.php');
-require_once('./Services/Utilities/classes/class.ilConfirmationGUI.php');
-require_once('./Services/jQuery/classes/class.iljQueryUtil.php');
+
+#require_once('./Services/Component/classes/class.ilPluginConfigGUI.php');
+#require_once('./Services/Form/classes/class.ilPropertyFormGUI.php');
+#require_once('./Services/Utilities/classes/class.ilConfirmationGUI.php');
+#require_once('./Services/jQuery/classes/class.iljQueryUtil.php');
 
 
- 
+
 /**
  *
  * @author Marko Glaubitz, Johannes Heim <ilias@rz.uni-freiburg.de>
@@ -45,7 +41,6 @@ class ilPDLitfassConfigGUI extends ilPluginConfigGUI
 
 		}
 	}
-
 	/**
 	 * Configure screen
 	 */
@@ -55,6 +50,7 @@ class ilPDLitfassConfigGUI extends ilPluginConfigGUI
 
 		$form = $this->initConfigurationForm();
 		$tpl->setContent($form->getHTML());
+
 	}
 	
 	//
@@ -135,6 +131,15 @@ class ilPDLitfassConfigGUI extends ilPluginConfigGUI
                 $students_roles->setValue($eroles[sroles]);
                 $form->addItem($students_roles);
 
+	                        //Students
+                $info = new ilNonEditableValueGUI($pl->txt("info"), "info");
+                //$sroles =   $this->getConfigValue($id);
+
+		$roles = getRoles(2,1);
+		print_r( $roles);
+
+                $info->setValue(implode("  |   ",$roles));
+                $form->addItem($info);
 	
 
 		return $form;
@@ -304,6 +309,6 @@ class ilPDLitfassConfigGUI extends ilPluginConfigGUI
                 return $names;
         }
 
-       
+
 }
 ?>
