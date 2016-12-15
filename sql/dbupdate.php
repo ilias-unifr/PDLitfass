@@ -17,6 +17,10 @@
 			'type'=>'text',
 			'length'=>300
 		),
+		'roles'=>array(
+			'type'=>'text',
+			'length'=>15
+		),
 	);
 	
 	$ilDB->createTable('ui_uihk_litfass_config', $fields);

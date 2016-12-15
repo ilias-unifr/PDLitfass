@@ -16,12 +16,38 @@ class ilPDLitfassPlugin extends ilUserInterfaceHookPlugin
 		return "PDLitfass";
 	}
 
+	protected static $config_cache;
+
+	protected static $plugin_cache;
+
+/**
+
+	        * @return ilCtrlMainMenuPlugin
+         */
+        public static function getInstance() {
+                if (!isset(self::$plugin_cache)) {
+                        self::$plugin_cache = new ilPDLitfassPlugin();
+                }
+
+                return self::$plugin_cache;
+        }
+
+
         protected function uninstallCustom()
         {
 		global $ilDB;
         	$ilDB->dropTable('ui_uihk_litfass_config');				
         }
 
+
+
+
+	protected function getRoles() 
+	{
+		$rbacreview;
+		$roles = $rbacreview->getRolesByFilter(2, $ilUser->getId());
+		return roles;
+	}
 
 }
 

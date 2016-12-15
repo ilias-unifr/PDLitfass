@@ -3,7 +3,13 @@
 //
 
 <!-- language file start -->
-pdlitfass_configuration#:#PDLitfass Konfiguration
-save#:#Speichern
+litfass_configuration#:#Litfass Konfiguration
 configuration_saved#:#Konfiguration wurde gespeichert.
 show_block#:#Block auf Persönlichem Schreibtisch anzeigen
+litfass_title#:#Titel der Nachricht
+litfass_message#:#Text der Nachricht
+employee#:#Fuer MitarbeiterInnen sichtbar
+student#:#Fuer StudentInnen sichtbar
+saving_invoked#:#Konfiguration gespeichert
+employee_roles#:#RollenIDs fuer MitarbeiterInnen
+students_roles#:#RollenIDs fuer Studierende
