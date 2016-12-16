@@ -42,11 +42,15 @@ class ilPDLitfassUIHookGUI extends ilUIHookPluginGUI
 
 
 		// add things to the personal desktop overview
-
-		$show_Block = showBlock(ilPDLitfassConfigGUI::getcurrentID());
 		
+		$cid = ilPDLitfassConfigGUI::getcurrentID();
+		$configValues =  ilPDLitfassConfigGUI::getConfigValue($cid);
+		$show_Block = showBlock($cid);
+		$position = ($configValues[position]); 
+			//print_r($configValues);	
+//			echo "test" .$position;
 		
-		if ($a_comp == "Services/PersonalDesktop" && $a_part == "center_column" && $show_Block == true)
+		if ($a_comp == "Services/PersonalDesktop" && $a_part == $position."_column" && $show_Block == true)
 		{
 			// $a_par["personal_desktop_gui"] is ilPersonalDesktopGUI object
 			

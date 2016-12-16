@@ -67,6 +67,8 @@ class ilPDLitfassConfigGUI extends ilPluginConfigGUI
 		$pl = $this->getPluginObject();
 
 		$id = $this->getcurrentID();
+
+		$config_values = $this->getConfigValue($id);
 	
 		include_once("Services/Form/classes/class.ilPropertyFormGUI.php");
 		$form = new ilPropertyFormGUI();
@@ -74,23 +76,23 @@ class ilPDLitfassConfigGUI extends ilPluginConfigGUI
 		// Show Block?
 		$cb = new ilCheckboxInputGUI($pl->txt("show_block"), "show_block");
 		$cb -> setValue(1);
-		$checked = $this->getConfigValue($id); 
-		$cb->setChecked($checked[display]);
+		//$checked = $this->getConfigValue($id); 
+		$cb->setChecked($config_values[display]);
 		$form->addItem($cb);
 		
 		//PDLitfass Info Title
                 $litfass_title =  new ilTextInputGUI($pl->txt("litfass_title"), "litfass_title");
                 $litfass_title->setRequired(true);
-                $littitle = $this->getConfigValue($id);
-                $litfass_title->setValue($littitle[title]);
+                //$littitle = $this->getConfigValue($id);
+                $litfass_title->setValue($config_values[title]);
                 $form->addItem($litfass_title);
 		
 		// PDLitfass Info message
 		$litfass_message = new ilTextAreaInputGUI($pl->txt("litfass_message"), "litfass_message");
 //		$litfass_message = new ilPageEditorGUI($pl->txt("litfass_message"), "litfass_message");
 		$litfass_message->setRequired(true);
-		$litmessage =	$this->getConfigValue($id);
-		$litfass_message->setValue($litmessage[message]);
+		//$litmessage =	$this->getConfigValue($id);
+		$litfass_message->setValue($config_values[message]);
 		$form->addItem($litfass_message);
 
 		// Save Button
@@ -104,14 +106,14 @@ class ilPDLitfassConfigGUI extends ilPluginConfigGUI
                 $locale_roles = self::getRoles(ilRbacReview::FILTER_ALL_LOCAL);
 		$employee =	new ilCheckboxInputGUI($pl->txt("employee"), "employee");
 		$employee -> setValue(1);
-		$checked = $this->getConfigValue($id);
-		$employee->setChecked($checked[employee]);
+		//$checked = $this->getConfigValue($id);
+		$employee->setChecked($config_values[employee]);
 		$form->addItem($employee);	
 		
                 $student =     new ilCheckboxInputGUI($pl->txt("student"), "student");
                 $student -> setValue(1);
-                $checked = $this->getConfigValue($id);
-                $student->setChecked($checked[student]);
+                //$checked = $this->getConfigValue($id);
+                $student->setChecked($config_values[student]);
                 $form->addItem($student); 	
 
 		//Role Mapping
@@ -120,15 +122,15 @@ class ilPDLitfassConfigGUI extends ilPluginConfigGUI
 
                 $employee_roles = new ilTextInputGUI($pl->txt("employee_roles"), "employee_roles");
                 $employee_roles->setRequired(true);
-                $eroles =   $this->getConfigValue($id);
-                $employee_roles->setValue($eroles[eroles]);
+                //$eroles =   $this->getConfigValue($id);
+                $employee_roles->setValue($config_values[eroles]);
                 $form->addItem($employee_roles);
 
 			//Students
 	        $students_roles = new ilTextInputGUI($pl->txt("students_roles"), "students_roles");
                 $students_roles->setRequired(true);
-                $sroles =   $this->getConfigValue($id);
-                $students_roles->setValue($eroles[sroles]);
+                //$sroles =   $this->getConfigValue($id);
+                $students_roles->setValue($config_values[sroles]);
                 $form->addItem($students_roles);
 
 	                        //Students
@@ -136,18 +138,30 @@ class ilPDLitfassConfigGUI extends ilPluginConfigGUI
                 //$sroles =   $this->getConfigValue($id);
 
 		$roles = getRoles(2,1);
-		print_r( $roles);
+		//print_r( $roles);
 
                 $info->setValue(implode("  |   ",$roles));
                 $form->addItem($info);
-	
 
+               //  radio position
+                $rad = new ilRadioGroupInputGUI($lng->txt("lit_position"), "position");
+                $rad_op1 = new ilRadioOption($lng->txt("lit_left"), "left");
+
+                $rad->addOption($rad_op1);
+                $rad_op2 = new ilRadioOption($lng->txt("lit_center"), "center");
+                $rad->addOption($rad_op2);
+                $rad_op3 = new ilRadioOption($lng->txt("lit_right"), "right");
+		$rad->addOption($rad_op3);
+		$rad->setValue($config_values[position]);
+
+		$form->addItem($rad);
 		return $form;
 	}
 	
 	/**
 	 * Save form input 	 *
 	 */
+
 	public function save()
 	{
 		global $tpl, $lng, $ilCtrl, $ilDB;
@@ -166,9 +180,13 @@ class ilPDLitfassConfigGUI extends ilPluginConfigGUI
 
 			$eroles = $form->getInput("employee_roles");
 			$sroles = $form->getInput("students_roles");
+
+			$position = $form->getInput("position");
+			
+			echo $position;
 			// store Values
 
-			$this->storeConfigValue($id, $cb, $litfass_message, $litfass_title,$employee,$student,$eroles,$sroles);	
+			$this->storeConfigValue($id, $cb, $litfass_message, $litfass_title,$employee,$student,$eroles,$sroles,$position);	
 			ilUtil::sendSuccess($pl->txt("saving_invoked"), true);
 			$ilCtrl->redirect($this, "configure");
 		}
@@ -180,12 +198,12 @@ class ilPDLitfassConfigGUI extends ilPluginConfigGUI
 	}
 
 
-		protected function storeConfigValue($id, $display, $litfass_message, $litfass_title, $employee, $student, $eroles, $sroles)
+		protected function storeConfigValue($id, $display, $litfass_message, $litfass_title, $employee, $student, $eroles, $sroles,$position)
 		{
 			global $ilDB;
 			
 		//	if($this->getConfigValue('1'))
-				$sql = "INSERT INTO `ui_uihk_litfass_config` (`id`,`display`,`message`, `title`, `employee`,`student`,`eroles`,`sroles`)
+				$sql = "INSERT INTO `ui_uihk_litfass_config` (`id`,`display`,`message`, `title`, `employee`,`student`,`eroles`,`sroles`,`position`)
 						VALUES (
 							{$ilDB->quote($id, "text")},
 							{$ilDB->quote($display, "text")},
@@ -194,7 +212,8 @@ class ilPDLitfassConfigGUI extends ilPluginConfigGUI
 							{$ilDB->quote($employee, "text")},
 							{$ilDB->quote($student, "text")},
 							{$ilDB->quote($eroles, "text")},
-							{$ilDB->quote($sroles, "text")})";
+							{$ilDB->quote($sroles, "text")},
+							{$ilDB->quote($position, "text")})";
 			
 		//	else
 		//		$sql = "UPDATE `ui_uihk_litfass_config`

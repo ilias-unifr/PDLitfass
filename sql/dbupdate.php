@@ -48,11 +48,15 @@
                'sroles'=>array(
                         'type'=>'text',
                         'length'=>300
-                ),
+                ),	
+	       'position'=>array(
+                        'type'=>'text',
+                        'length'=>10
+                ),	
 		
 	);
 	
-	$ilDB->createTable('ui_uihk_litfass_config', $fields);
+	$ilDB->oreateTable('ui_uihk_litfass_config', $fields);
 	$ilDB->addPrimaryKey('ui_uihk_litfass_config', array('id'));
 	$ilDB->createSequence('ui_uihk_litfass_config');
 //	$ilDB->manipulate($sql);
