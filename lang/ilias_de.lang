@@ -14,3 +14,4 @@ saving_invoked#:#Konfiguration gespeichert
 employee_roles#:#RollenIDs für MitarbeiterInnen
 students_roles#:#RollenIDs für Studierende
 info#:#RollenIDs:
+message_id#:Message ID:
