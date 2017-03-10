@@ -85,6 +85,8 @@ if(!$ilDB->tableExists('ui_uihk_litfass_messages_ids'))
 		'user_id'=>array(
 			'type'=>'integer',
 			'length'=>2 ));
+
 	$ilDB->createTable('ui_uihk_litfass_messages_ids', $fields);
 
 }
+?>
