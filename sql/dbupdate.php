@@ -51,10 +51,7 @@
                 ),	
 	       'position'=>array(
                         'type'=>'text',
-                        'length'=>10
-                ),	
-		
-	);
+                        'length'=>10	);
 	
 	$ilDB->createTable('ui_uihk_litfass_config', $fields);
 	$ilDB->addPrimaryKey('ui_uihk_litfass_config', array('id'));
@@ -76,4 +73,18 @@ if(!$ilDB->tableColumnExists('ui_uihk_litfass_config', 'position'))
 }
 ?>
 
+<#3>
+<?php
+if(!$ilDB->tableExists('ui_uihk_litfass_messages_ids'))
+{
+		$fields = array(
+		'message_id'=>array(
+			'type'=>'integer',
+			'length'=>2
+		),
+		'user_id'=>array(
+			'type'=>'integer',
+			'length'=>2 ));
+	$ilDB->createTable('ui_uihk_litfass_messages_ids', $fields);
 
+}
