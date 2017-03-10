@@ -65,7 +65,7 @@
 
 
 
-<#26>
+<#2>
 <?php
 if(!$ilDB->tableColumnExists('ui_uihk_litfass_config', 'position'))
 {
