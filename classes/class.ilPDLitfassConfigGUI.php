@@ -75,7 +75,7 @@ class ilPDLitfassConfigGUI extends ilPluginConfigGUI
 		
 		// Show message id
 		$message_id = new ilNonEditableValueGUI($pl->txt("message_id"), "message_id");
-		$message_id->setValue(getcurrentID());
+		$message_id->setValue($id);
 		$form->addItem($message_id);
 
 		
