@@ -51,7 +51,7 @@ class ilPDLitfassUIHookGUI extends ilUIHookPluginGUI
 //			echo "test" .$position;
 		
 		if ($a_comp == "Services/PersonalDesktop" && $a_part == $position."_column" && $show_Block == true)
-		{
+			{
 			// $a_par["personal_desktop_gui"] is ilPersonalDesktopGUI object
 			
 	            	global  $ilUser;

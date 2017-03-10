@@ -73,6 +73,12 @@ class ilPDLitfassConfigGUI extends ilPluginConfigGUI
 		include_once("Services/Form/classes/class.ilPropertyFormGUI.php");
 		$form = new ilPropertyFormGUI();
 		
+		// Show message id
+		$message_id = new ilNonEditableValueGUI($pl->txt("message_id"), "message_id");
+		$message_id->setValue("test ");
+		$form->addItem($message_id);
+
+		
 		// Show Block?
 		$cb = new ilCheckboxInputGUI($pl->txt("show_block"), "show_block");
 		$cb -> setValue(1);
