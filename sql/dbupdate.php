@@ -1,16 +1,6 @@
 <#1>
 <?php
-//$sql = "INSERT INTO `ui_uihk_litfass_config` (`id`,`display`,`message`, `title`, `employee`,`student`,`eroles`,`sroles`) VALUES (`1`,`0`,`Nachricht`,`Titel`,`0`,`0`,`2,233`,`266`)"
-                        //        $sql = "INSERT INTO `ui_uihk_litfass_config` (`id`,`display`,`message`, `title`, `employee`,`student`,`eroles`,`sroles`)
-                         //                       VALUES (
-                           //                             {$ilDB->quote("1", "text")},
-                             //                           {$ilDB->quote("0", "text")},
-                               //                         {$ilDB->quote("Nachricht", "text")},
-                                 //                       {$ilDB->quote("Titel", "text")},
-                                   //                     {$ilDB->quote("0", "text")},
-                                     //                   {$ilDB->quote("0", "text")},
-                                       //                 {$ilDB->quote("2,233", "text")},
-                                         //               {$ilDB->quote("266", "text")})";
+
 
 	$fields = array(
 		'id'=>array(
@@ -51,12 +41,12 @@
                 ),	
 	       'position'=>array(
                         'type'=>'text',
-                        'length'=>10	);
+                        'length'=>10	));
 	
 	$ilDB->createTable('ui_uihk_litfass_config', $fields);
 	$ilDB->addPrimaryKey('ui_uihk_litfass_config', array('id'));
 	$ilDB->createSequence('ui_uihk_litfass_config');
-//	$ilDB->manipulate($sql);
+
 
 ?>
 
@@ -90,7 +80,7 @@ if(!$ilDB->tableColumnExists('ui_uihk_litfass_config', 'position'))
 		)
 	);
 
-	$ilDB->createTable('ui_uihk_litfass_messages_ids', $fields);
+	$ilDB->createTable('ui_uihk_litfass_m_ids', $fields);
 
 }
 ?>
