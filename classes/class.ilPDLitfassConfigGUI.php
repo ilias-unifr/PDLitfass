@@ -8,14 +8,6 @@ require_once('./Services/Utilities/classes/class.ilConfirmationGUI.php');
 require_once('./Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/PDLitfass/classes/class.ilPDLitfassFunctions.php');
 
 
-
-#require_once('./Services/Component/classes/class.ilPluginConfigGUI.php');
-#require_once('./Services/Form/classes/class.ilPropertyFormGUI.php');
-#require_once('./Services/Utilities/classes/class.ilConfirmationGUI.php');
-#require_once('./Services/jQuery/classes/class.iljQueryUtil.php');
-
-
-
 /**
  *
  * @author Marko Glaubitz, Johannes Heim <ilias@rz.uni-freiburg.de>

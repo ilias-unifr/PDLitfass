@@ -15,8 +15,6 @@ include_once("./Customizing/global/plugins/Services/UIComponent/UserInterfaceHoo
 
 
 
-
-
 class ilPDLitfassUIHookGUI extends ilUIHookPluginGUI
 {
 
